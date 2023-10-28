@@ -1,0 +1,39 @@
+﻿version: '3.8'
+services:
+  recapapi:
+    image: recapapi
+    container_name: recapapi
+    build:
+      context: .
+      dockerfile: RecapApi/Dockerfile
+      
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_DB: recapaspdotnetdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 4cdd89b8f88af14a
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: tonoy.sust@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 4cdd89b8f88af14a
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_data:
+  pgadmin_data:

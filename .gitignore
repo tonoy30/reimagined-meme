@@ -1,0 +1,79 @@
+# ASP.NET and Visual Studio files
+.vscode/
+.vs/
+bin/
+obj/
+Publish/
+node_modules/
+*.suo
+*.user
+*.sln.docstates
+*Cache/
+ClientBin/
+[Oo]bj/
+[Bb]in/
+[Tt]est[Rr]esult*/
+_Packages/
+NuGet.Dll
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+_*Publish.xml
+*.swp
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+[Tt]humbs.db
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+[Nn]ode[Rr]eport*/
+[Ss]tyle[Cc]op.*
+[Ii]I[Ss]Express/
+data/
+*.DS_Store
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider directories
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
