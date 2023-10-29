@@ -13,12 +13,27 @@ public static class ServiceExtensions
         builder
             .Services
             .Configure<ConnectionStringOptions>(builder.Configuration.GetSection(ConnectionStringOptions.Name));
-        builder.Services.AddSingleton<IValidateOptions<ConnectionStringOptions>, ConnectionStringOptionsValidation>();
+        builder
+            .Services
+            .AddSingleton<IValidateOptions<ConnectionStringOptions>, ConnectionStringOptionsValidation>();
     }
 
     public static void AddPostgres(this WebApplicationBuilder builder)
     {
-        builder.Services.AddDbContext<ApplicationDbContext>(opt =>
-            opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder
+            .Services
+            .AddDbContext<ApplicationDbContext>(opt =>
+                opt.UseNpgsql(builder.Configuration.GetConnectionString(RecapApiResources.PostgresDefaultConnection)));
+    }
+
+    public static void ConfigureCors(this IServiceCollection services)
+    {
+        services.AddCors(opt =>
+            opt.AddPolicy(RecapApiResources.CorsPolicy, builder =>
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            ));
     }
 }

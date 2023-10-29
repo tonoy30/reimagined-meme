@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.HttpOverrides;
+using RecapApi;
 using RecapApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +21,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.All
+});
+
+app.UseCors(RecapApiResources.CorsPolicy);
 
 app.UseAuthorization();
 
