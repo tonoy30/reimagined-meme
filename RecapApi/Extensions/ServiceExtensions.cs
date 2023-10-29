@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RecapApi.Configs;
+using RecapApi.Contracts;
 using RecapApi.DbContexts;
 using RecapApi.Validations;
 
@@ -35,5 +36,15 @@ public static class ServiceExtensions
                     .AllowAnyMethod()
                     .AllowAnyHeader()
             ));
+    }
+
+    public static void ConfigureRepositoryManager(this IServiceCollection services)
+    {
+        services.AddScoped<IRepositoryManager, RepositoryManager>();
+    }
+
+    public static void ConfigureServiceManager(this IServiceCollection services)
+    {
+        services.AddScoped<IServiceManager, ServiceManager>();
     }
 }
