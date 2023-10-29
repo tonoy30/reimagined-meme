@@ -9,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.AddConfigOptions();
+builder.AddPostgres();
 
 var app = builder.Build();
 

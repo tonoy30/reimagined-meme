@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RecapApi.Configs;
+using RecapApi.DbContexts;
 using RecapApi.Validations;
 
 namespace RecapApi.Extensions;
@@ -10,7 +12,13 @@ public static class ServiceExtensions
     {
         builder
             .Services
-            .Configure<DbConfig>(builder.Configuration.GetSection(nameof(DbConfig)));
-        builder.Services.AddSingleton<IValidateOptions<DbConfig>, DbConfigValidation>();
+            .Configure<ConnectionStringOptions>(builder.Configuration.GetSection(ConnectionStringOptions.Name));
+        builder.Services.AddSingleton<IValidateOptions<ConnectionStringOptions>, ConnectionStringOptionsValidation>();
+    }
+
+    public static void AddPostgres(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddDbContext<ApplicationDbContext>(opt =>
+            opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
     }
 }
