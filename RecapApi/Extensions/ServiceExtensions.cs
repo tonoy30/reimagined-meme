@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using RecapApi.Configs;
 using RecapApi.Contracts;
 using RecapApi.DbContexts;
+using RecapApi.Options;
 using RecapApi.Validations;
 
 namespace RecapApi.Extensions;

@@ -1,4 +1,4 @@
-namespace RecapApi.Configs;
+namespace RecapApi.Options;
 
 public sealed class ConnectionStringOptions
 {

@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Options;
-using RecapApi.Configs;
+using RecapApi.Options;
 
 namespace RecapApi.Validations;
 
