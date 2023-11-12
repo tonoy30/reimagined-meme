@@ -11,11 +11,6 @@ public static class AddApiVersioningExtensions
             opt.AssumeDefaultVersionWhenUnspecified = true;
             opt.DefaultApiVersion = new ApiVersion(1, 0);
             opt.ReportApiVersions = true;
-            opt.ApiVersionReader = ApiVersionReader.Combine(
-                new QueryStringApiVersionReader("api-version"),
-                new HeaderApiVersionReader("X-Version"),
-                new MediaTypeApiVersionReader("ver")
-            );
         });
     }
 }
