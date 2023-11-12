@@ -4,7 +4,7 @@ using RecapApi.Attributes;
 
 namespace RecapApi.Entities;
 
-public class Company : BaseEntity
+public sealed class Company : BaseEntity
 {
     [Key]
     [Identity("com")]
@@ -17,4 +17,8 @@ public class Company : BaseEntity
     public required string Name { get; set; }
 
     public string? Address { get; set; }
+
+    public string? Country { get; set; }
+
+    public ICollection<Employee>? Employees { get; set; }
 }

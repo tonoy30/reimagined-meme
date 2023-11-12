@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RecapApi.DbContexts;
+using RecapApi.Repositories;
 
 #nullable disable
 
 namespace RecapApi.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(RepositoryContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -29,6 +29,9 @@ namespace RecapApi.Migrations
                         .HasAnnotation("Relational:JsonPropertyName", "id");
 
                     b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
@@ -68,6 +71,9 @@ namespace RecapApi.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Relational:JsonPropertyName", "age");
 
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
@@ -98,19 +104,35 @@ namespace RecapApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.ToTable("Employees");
 
                     b.HasData(
                         new
                         {
-                            Id = "emp_XSxyt2Hs6dRZTP",
+                            Id = "emp_OnJez6Izc26tBz",
                             Age = 26,
-                            CreatedAt = new DateTime(2023, 11, 11, 5, 26, 40, 569, DateTimeKind.Utc).AddTicks(9970),
+                            CreatedAt = new DateTime(2023, 11, 12, 2, 11, 18, 632, DateTimeKind.Utc).AddTicks(3220),
                             IsDeleted = false,
-                            ModifiedAt = new DateTime(2023, 11, 11, 5, 26, 40, 569, DateTimeKind.Utc).AddTicks(9970),
+                            ModifiedAt = new DateTime(2023, 11, 12, 2, 11, 18, 632, DateTimeKind.Utc).AddTicks(3220),
                             Name = "Tonoy Akanda",
                             Position = "Founder & CTO"
                         });
+                });
+
+            modelBuilder.Entity("RecapApi.Entities.Employee", b =>
+                {
+                    b.HasOne("RecapApi.Entities.Company", "Company")
+                        .WithMany("Employees")
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("RecapApi.Entities.Company", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

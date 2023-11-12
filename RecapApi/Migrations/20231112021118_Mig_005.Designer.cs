@@ -12,8 +12,8 @@ using RecapApi.Repositories;
 namespace RecapApi.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20231111052202_Mig_003")]
-    partial class Mig_003
+    [Migration("20231112021118_Mig_005")]
+    partial class Mig_005
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,9 +34,13 @@ namespace RecapApi.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("text");
 
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now() at time zone 'utc'")
                         .HasAnnotation("Relational:JsonPropertyName", "created_at");
 
                     b.Property<bool>("IsDeleted")
@@ -46,6 +50,7 @@ namespace RecapApi.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now() at time zone 'utc'")
                         .HasAnnotation("Relational:JsonPropertyName", "modified_at");
 
                     b.Property<string>("Name")
@@ -69,9 +74,13 @@ namespace RecapApi.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Relational:JsonPropertyName", "age");
 
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now() at time zone 'utc'")
                         .HasAnnotation("Relational:JsonPropertyName", "created_at");
 
                     b.Property<bool>("IsDeleted")
@@ -81,6 +90,7 @@ namespace RecapApi.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now() at time zone 'utc'")
                         .HasAnnotation("Relational:JsonPropertyName", "modified_at");
 
                     b.Property<string>("Name")
@@ -97,19 +107,35 @@ namespace RecapApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.ToTable("Employees");
 
                     b.HasData(
                         new
                         {
-                            Id = "emp_YqONrraKDzMn9P",
+                            Id = "emp_OnJez6Izc26tBz",
                             Age = 26,
-                            CreatedAt = new DateTime(2023, 11, 11, 5, 22, 2, 239, DateTimeKind.Utc).AddTicks(2150),
+                            CreatedAt = new DateTime(2023, 11, 12, 2, 11, 18, 632, DateTimeKind.Utc).AddTicks(3220),
                             IsDeleted = false,
-                            ModifiedAt = new DateTime(2023, 11, 11, 5, 22, 2, 239, DateTimeKind.Utc).AddTicks(2150),
+                            ModifiedAt = new DateTime(2023, 11, 12, 2, 11, 18, 632, DateTimeKind.Utc).AddTicks(3220),
                             Name = "Tonoy Akanda",
                             Position = "Founder & CTO"
                         });
+                });
+
+            modelBuilder.Entity("RecapApi.Entities.Employee", b =>
+                {
+                    b.HasOne("RecapApi.Entities.Company", "Company")
+                        .WithMany("Employees")
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("RecapApi.Entities.Company", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

@@ -14,6 +14,7 @@ try
     builder.Host.UseSerilog();
 
     // Add services to the container.
+    builder.Services.AddAutoMapper(typeof(Program));
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();

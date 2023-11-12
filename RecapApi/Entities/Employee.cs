@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using RecapApi.Attributes;
 
@@ -24,4 +25,8 @@ public sealed class Employee : BaseEntity
     [Required(ErrorMessage = "Position is a required field.")]
     [MaxLength(20, ErrorMessage = "Maximum length for the Position is 20characters.")]
     public string? Position { get; set; }
+
+    [ForeignKey(nameof(Company))] public string? CompanyId { get; set; }
+
+    public Company? Company { get; set; }
 }

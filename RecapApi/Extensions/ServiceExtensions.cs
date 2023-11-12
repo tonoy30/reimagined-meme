@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RecapApi.Contracts;
-using RecapApi.DbContexts;
 using RecapApi.Options;
+using RecapApi.Repositories;
+using RecapApi.Services;
 using RecapApi.Validations;
 
 namespace RecapApi.Extensions;
@@ -23,7 +24,7 @@ public static class ServiceExtensions
     {
         builder
             .Services
-            .AddDbContext<ApplicationDbContext>(opt =>
+            .AddDbContext<RepositoryContext>(opt =>
                 opt.UseNpgsql(builder.Configuration.GetConnectionString(RecapApiResources.PostgresDefaultConnection)));
     }
 

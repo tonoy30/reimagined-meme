@@ -1,18 +1,15 @@
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using RecapApi.Attributes;
 using RecapApi.Configurations;
 using RecapApi.Entities;
 using RecapApi.Extensions;
-using RecapApi.ValueGenerators;
 
-namespace RecapApi.DbContexts;
+namespace RecapApi.Repositories;
 
-public class ApplicationDbContext : DbContext
+public class RepositoryContext : DbContext
 {
     private readonly IWebHostEnvironment _environment;
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IWebHostEnvironment environment) :
+    public RepositoryContext(DbContextOptions<RepositoryContext> options, IWebHostEnvironment environment) :
         base(options)
     {
         _environment = environment;
@@ -32,4 +29,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Employee>? Employees { get; set; }
+    public DbSet<Company>? Companies { get; set; }
 }

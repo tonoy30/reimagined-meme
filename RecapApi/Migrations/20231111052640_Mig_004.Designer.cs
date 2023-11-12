@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RecapApi.DbContexts;
+using RecapApi.Repositories;
 
 #nullable disable
 
 namespace RecapApi.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(RepositoryContext))]
     [Migration("20231111052640_Mig_004")]
     partial class Mig_004
     {
