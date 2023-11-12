@@ -40,6 +40,14 @@ public class AuthenticationController : ControllerBase
     {
         var isValidUser = await _service.AuthenticationService.ValidateUserAsync(user);
         if (!isValidUser) return Unauthorized();
-        return Ok(new { Token = await _service.AuthenticationService.CreateTokenAsync() });
+        var tokens = await _service.AuthenticationService.CreateTokenAsync(true);
+        return Ok(tokens);
+    }
+
+    [HttpPost("token/refesh")]
+    public async Task<IActionResult> RefreshTokenAsync([FromBody] TokenDto tokenDto)
+    {
+        var tokenDtoToReturn = await _service.AuthenticationService.RefreshTokenAsync(tokenDto);
+        return Ok(tokenDtoToReturn);
     }
 }

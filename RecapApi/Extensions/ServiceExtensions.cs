@@ -11,14 +11,13 @@ using RecapApi.Options;
 using RecapApi.Repositories;
 using RecapApi.Services;
 using RecapApi.Validators;
-using RedisRateLimiting;
 using StackExchange.Redis;
 
 namespace RecapApi.Extensions;
 
 public static class ServiceExtensions
 {
-    public static void ConfigureConfigOptions(this WebApplicationBuilder builder)
+    public static void ConfigureOptions(this WebApplicationBuilder builder)
     {
         builder
             .Services
@@ -26,6 +25,7 @@ public static class ServiceExtensions
         builder
             .Services
             .AddSingleton<IValidateOptions<ConnectionStringOptions>, ConnectionStringOptionsValidator>();
+        builder.Services.Configure<JwtConfigurations>(builder.Configuration.GetSection(JwtConfigurations.Name));
     }
 
     public static void ConfigurePostgresDb(this WebApplicationBuilder builder)

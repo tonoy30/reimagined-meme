@@ -20,7 +20,7 @@ try
     builder.Services.AddSwaggerGen();
 
     builder.ConfigureApiVersioning();
-    builder.ConfigureConfigOptions();
+    builder.ConfigureOptions();
     builder.ConfigurePostgresDb();
     builder.ConfigureRedisDb();
     builder.ConfigureRateLimiting();

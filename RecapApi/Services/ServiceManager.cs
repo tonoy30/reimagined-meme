@@ -1,8 +1,10 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols;
 using RecapApi.Contracts;
 using RecapApi.Entities;
+using RecapApi.Options;
 
 namespace RecapApi.Services;
 
@@ -12,8 +14,8 @@ public sealed class ServiceManager : IServiceManager
     private readonly Lazy<IEmployeeService> _employeeService;
     private readonly Lazy<IAuthenticationService> _authenticationService;
 
-    public ServiceManager(IRepositoryManager repositoryManager, UserManager<User> userManager, IMapper mapper,
-        IConfiguration configuration)
+    public ServiceManager(IRepositoryManager repositoryManager, UserManager<User> userManager,
+        IMapper mapper, IOptions<JwtConfigurations> configuration)
     {
         _companyService = new Lazy<ICompanyService>(() => new CompanyService(repositoryManager, mapper));
         _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService(repositoryManager, mapper));
