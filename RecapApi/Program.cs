@@ -19,6 +19,7 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.ConfigureApiVersioning();
     builder.AddConfigOptions();
     builder.AddPostgres();
 

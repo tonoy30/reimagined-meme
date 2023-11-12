@@ -1,5 +1,6 @@
 using AutoMapper;
 using RecapApi.Contracts;
+using RecapApi.DTOs;
 using RecapApi.Repositories;
 
 namespace RecapApi.Services;
@@ -13,5 +14,10 @@ public sealed class CompanyService : ICompanyService
     {
         _repositoryManager = repositoryManager;
         _mapper = mapper;
+    }
+
+    public async Task<IEnumerable<CompanyDto>> GetAllCompaniesAsync(bool trackChanges)
+    {
+        throw new NotImplementedException();
     }
 }
