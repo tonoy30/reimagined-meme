@@ -25,6 +25,7 @@ try
     builder.ConfigureRedisDb();
     builder.ConfigureRateLimiting();
     builder.ConfigureIdentity();
+    builder.ConfigureJwtToken();
 
     builder.Services.ConfigureCors();
     builder.Services.ConfigureRepositoryManager();

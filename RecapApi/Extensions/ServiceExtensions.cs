@@ -1,12 +1,17 @@
+using System.Text;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using RecapApi.Contracts;
 using RecapApi.Entities;
 using RecapApi.Options;
 using RecapApi.Repositories;
 using RecapApi.Services;
-using RecapApi.Validations;
+using RecapApi.Validators;
+using RedisRateLimiting;
 using StackExchange.Redis;
 
 namespace RecapApi.Extensions;
@@ -20,7 +25,7 @@ public static class ServiceExtensions
             .Configure<ConnectionStringOptions>(builder.Configuration.GetSection(ConnectionStringOptions.Name));
         builder
             .Services
-            .AddSingleton<IValidateOptions<ConnectionStringOptions>, ConnectionStringOptionsValidation>();
+            .AddSingleton<IValidateOptions<ConnectionStringOptions>, ConnectionStringOptionsValidator>();
     }
 
     public static void ConfigurePostgresDb(this WebApplicationBuilder builder)
@@ -76,5 +81,31 @@ public static class ServiceExtensions
             )
             .AddEntityFrameworkStores<RepositoryContext>()
             .AddDefaultTokenProviders();
+    }
+
+    public static void ConfigureJwtToken(this WebApplicationBuilder builder)
+    {
+        var jwtConfigurations = builder.Configuration.GetSection("JwtConfigurations");
+        builder
+            .Services
+            .AddAuthentication(opt =>
+                {
+                    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }
+            )
+            .AddJwtBearer(opt =>
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtConfigurations["ValidIssuer"],
+                    ValidAudience = jwtConfigurations["ValidAudience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfigurations["SecretKey"]!))
+                };
+            });
     }
 }

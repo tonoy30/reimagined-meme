@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using RecapApi.Contracts;
@@ -10,6 +11,7 @@ namespace RecapApi.Controllers;
 [ApiVersion("1.0")]
 [Route("/api/v{version:apiVersion}/[controller]")]
 [EnableRateLimiting("REDIS_TOKEN_BUCKET_RATE_LIMITER")]
+[Authorize]
 public class CompaniesController : ControllerBase
 {
     private readonly IServiceManager _service;
@@ -19,7 +21,7 @@ public class CompaniesController : ControllerBase
         _service = service;
     }
 
-    [HttpGet]
+    [HttpGet(Name = "GetCompanies")]
     public async Task<IActionResult> GetCompaniesAsync()
     {
         try

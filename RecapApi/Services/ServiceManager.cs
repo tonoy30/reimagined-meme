@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Protocols;
 using RecapApi.Contracts;
 using RecapApi.Entities;
 
@@ -11,11 +12,13 @@ public sealed class ServiceManager : IServiceManager
     private readonly Lazy<IEmployeeService> _employeeService;
     private readonly Lazy<IAuthenticationService> _authenticationService;
 
-    public ServiceManager(IRepositoryManager repositoryManager, UserManager<User> userManager, IMapper mapper)
+    public ServiceManager(IRepositoryManager repositoryManager, UserManager<User> userManager, IMapper mapper,
+        IConfiguration configuration)
     {
         _companyService = new Lazy<ICompanyService>(() => new CompanyService(repositoryManager, mapper));
         _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService(repositoryManager, mapper));
-        _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(userManager, mapper));
+        _authenticationService =
+            new Lazy<IAuthenticationService>(() => new AuthenticationService(userManager, mapper, configuration));
     }
 
     public ICompanyService CompanyService => _companyService.Value;

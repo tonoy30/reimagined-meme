@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Options;
 using RecapApi.Options;
 
-namespace RecapApi.Validations;
+namespace RecapApi.Validators;
 
-public sealed class ConnectionStringOptionsValidation : IValidateOptions<ConnectionStringOptions>
+public sealed class ConnectionStringOptionsValidator : IValidateOptions<ConnectionStringOptions>
 {
     public ValidateOptionsResult Validate(string? name, ConnectionStringOptions options)
     {
