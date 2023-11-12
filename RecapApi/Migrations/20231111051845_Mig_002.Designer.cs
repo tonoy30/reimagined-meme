@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RecapApi.DbContexts;
@@ -11,9 +12,11 @@ using RecapApi.DbContexts;
 namespace RecapApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231111051845_Mig_002")]
+    partial class Mig_002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,13 +31,9 @@ namespace RecapApi.Migrations
                         .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "id");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("now() at time zone 'utc'")
                         .HasAnnotation("Relational:JsonPropertyName", "created_at");
 
                     b.Property<bool>("IsDeleted")
@@ -44,7 +43,6 @@ namespace RecapApi.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("now() at time zone 'utc'")
                         .HasAnnotation("Relational:JsonPropertyName", "modified_at");
 
                     b.Property<string>("Name")
@@ -71,7 +69,6 @@ namespace RecapApi.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("now() at time zone 'utc'")
                         .HasAnnotation("Relational:JsonPropertyName", "created_at");
 
                     b.Property<bool>("IsDeleted")
@@ -81,7 +78,6 @@ namespace RecapApi.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("now() at time zone 'utc'")
                         .HasAnnotation("Relational:JsonPropertyName", "modified_at");
 
                     b.Property<string>("Name")
@@ -103,11 +99,11 @@ namespace RecapApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "emp_XSxyt2Hs6dRZTP",
+                            Id = "emp_Xmp1IKUCPNqtSp",
                             Age = 26,
-                            CreatedAt = new DateTime(2023, 11, 11, 5, 26, 40, 569, DateTimeKind.Utc).AddTicks(9970),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
-                            ModifiedAt = new DateTime(2023, 11, 11, 5, 26, 40, 569, DateTimeKind.Utc).AddTicks(9970),
+                            ModifiedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tonoy Akanda",
                             Position = "Founder & CTO"
                         });

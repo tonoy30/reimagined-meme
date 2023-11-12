@@ -4,7 +4,7 @@ using RecapApi.Attributes;
 
 namespace RecapApi.Entities;
 
-public sealed class Employee
+public sealed class Employee : BaseEntity
 {
     [Key]
     [Identity("emp")]

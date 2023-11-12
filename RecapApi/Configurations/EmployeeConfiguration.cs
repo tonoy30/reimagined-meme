@@ -16,7 +16,9 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
                 Id = RandomIdGenerator.Generate("emp"),
                 Name = "Tonoy Akanda",
                 Age = 26,
-                Position = "Founder & CTO"
+                Position = "Founder & CTO",
+                CreatedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow
             },
         };
         builder.HasData(employees);

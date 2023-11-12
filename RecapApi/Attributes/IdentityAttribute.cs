@@ -1,6 +1,6 @@
 namespace RecapApi.Attributes;
 
-[AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+[AttributeUsage(AttributeTargets.Property)]
 public sealed class IdentityAttribute : Attribute
 {
     public string Prefix { get; set; }
