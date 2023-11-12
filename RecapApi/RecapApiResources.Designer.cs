@@ -56,5 +56,15 @@ namespace RecapApi {
                 return ResourceManager.GetString("PostgresDefaultConnection", resourceCulture);
             }
         }
+        internal static string RedisUrl {
+            get {
+                return ResourceManager.GetString("RedisUrl", resourceCulture);
+            }
+        }
+        internal static string TokenBucketRateLimitingPolicy {
+            get {
+                return ResourceManager.GetString("TokenBucketRateLimitingPolicy", resourceCulture);
+            }
+        }
     }
 }

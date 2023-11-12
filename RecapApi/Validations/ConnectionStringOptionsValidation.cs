@@ -7,8 +7,8 @@ public sealed class ConnectionStringOptionsValidation : IValidateOptions<Connect
 {
     public ValidateOptionsResult Validate(string? name, ConnectionStringOptions options)
     {
-        return string.IsNullOrEmpty(options.DefaultConnection)
-            ? ValidateOptionsResult.Fail("Database connection string is required.")
+        return string.IsNullOrEmpty(options.DefaultConnection) || string.IsNullOrEmpty(options.RedisUrl)
+            ? ValidateOptionsResult.Fail($"{name} is required.")
             : ValidateOptionsResult.Success;
     }
 }

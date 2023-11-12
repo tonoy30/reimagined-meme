@@ -29,5 +29,10 @@
     <data name="PostgresDefaultConnection" xml:space="preserve">
         <value>DefaultConnection</value>
     </data>
-  
+    <data name="RedisUrl" xml:space="preserve">
+        <value>RedisUrl</value>
+    </data>
+    <data name="TokenBucketRateLimitingPolicy" xml:space="preserve">
+        <value>REDIS_TOKEN_BUCKET_RATE_LIMITER</value>
+    </data>
 </root>

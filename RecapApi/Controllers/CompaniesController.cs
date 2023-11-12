@@ -1,13 +1,15 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using RecapApi.Contracts;
 using Serilog;
 
 namespace RecapApi.Controllers;
 
 [ApiController]
-[Route("/api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
+[Route("/api/v{version:apiVersion}/[controller]")]
+[EnableRateLimiting("REDIS_TOKEN_BUCKET_RATE_LIMITER")]
 public class CompaniesController : ControllerBase
 {
     private readonly IServiceManager _service;

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RecapApi.Repositories;
@@ -11,9 +12,11 @@ using RecapApi.Repositories;
 namespace RecapApi.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231112080008_Mig_009_Identity")]
+    partial class Mig_009_Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,20 +49,6 @@ namespace RecapApi.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "778718bd-ca59-4439-bd25-ca8fa5032ba5",
-                            Name = "Manager",
-                            NormalizedName = "MANAGER"
-                        },
-                        new
-                        {
-                            Id = "c232ddce-052e-49d2-b751-331a211e2773",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -207,9 +196,9 @@ namespace RecapApi.Migrations
                             Id = "cmp_TMtrWseo08Z2Mk",
                             Address = "1009, Oscar Neer, East Shwerepara, Mirpur, Dhaka-1216",
                             Country = "Bangladesh",
-                            CreatedAt = new DateTime(2023, 11, 12, 8, 7, 9, 410, DateTimeKind.Utc).AddTicks(5890),
+                            CreatedAt = new DateTime(2023, 11, 12, 8, 0, 8, 875, DateTimeKind.Utc).AddTicks(5470),
                             IsDeleted = false,
-                            ModifiedAt = new DateTime(2023, 11, 12, 8, 7, 9, 410, DateTimeKind.Utc).AddTicks(5890),
+                            ModifiedAt = new DateTime(2023, 11, 12, 8, 0, 8, 875, DateTimeKind.Utc).AddTicks(5480),
                             Name = "ContentCraft"
                         });
                 });
@@ -257,23 +246,23 @@ namespace RecapApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "emp_ndUNSBO67hwiYm",
+                            Id = "emp_mq2R8aEd9zbVdv",
                             Age = 26,
                             CompanyId = "cmp_TMtrWseo08Z2Mk",
-                            CreatedAt = new DateTime(2023, 11, 12, 8, 7, 9, 410, DateTimeKind.Utc).AddTicks(6060),
+                            CreatedAt = new DateTime(2023, 11, 12, 8, 0, 8, 875, DateTimeKind.Utc).AddTicks(5650),
                             IsDeleted = false,
-                            ModifiedAt = new DateTime(2023, 11, 12, 8, 7, 9, 410, DateTimeKind.Utc).AddTicks(6070),
+                            ModifiedAt = new DateTime(2023, 11, 12, 8, 0, 8, 875, DateTimeKind.Utc).AddTicks(5650),
                             Name = "Tonoy Akanda",
                             Position = "Founder & CTO"
                         },
                         new
                         {
-                            Id = "emp_kT8EnuexeL2wah",
+                            Id = "emp_Jvxm0eHvIISusz",
                             Age = 26,
                             CompanyId = "cmp_TMtrWseo08Z2Mk",
-                            CreatedAt = new DateTime(2023, 11, 12, 8, 7, 9, 410, DateTimeKind.Utc).AddTicks(6070),
+                            CreatedAt = new DateTime(2023, 11, 12, 8, 0, 8, 875, DateTimeKind.Utc).AddTicks(5660),
                             IsDeleted = false,
-                            ModifiedAt = new DateTime(2023, 11, 12, 8, 7, 9, 410, DateTimeKind.Utc).AddTicks(6070),
+                            ModifiedAt = new DateTime(2023, 11, 12, 8, 0, 8, 875, DateTimeKind.Utc).AddTicks(5660),
                             Name = "Ali Ahmmed",
                             Position = "Founder & CFO"
                         });

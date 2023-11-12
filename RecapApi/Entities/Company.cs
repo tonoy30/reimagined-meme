@@ -6,12 +6,8 @@ namespace RecapApi.Entities;
 
 public sealed class Company : BaseEntity
 {
-    [Key]
-    [Identity("com")]
-    [JsonPropertyName("id")]
-    public required string Id { get; set; }
+    [Key] [Identity("com")] public required string Id { get; set; }
 
-    [JsonPropertyName("name")]
     [Required(ErrorMessage = "Company name is a required field.")]
     [MaxLength(256, ErrorMessage = "Maximum length for the Name is 256 characters.")]
     public required string Name { get; set; }

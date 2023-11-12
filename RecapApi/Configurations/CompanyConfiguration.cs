@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RecapApi.Entities;
-using RecapApi.Utils;
 
 namespace RecapApi.Configurations;
 
@@ -21,7 +20,6 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
                 ModifiedAt = DateTime.UtcNow,
             }
         };
-
         builder.HasData(companies);
     }
 }

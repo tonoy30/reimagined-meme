@@ -20,8 +20,11 @@ try
     builder.Services.AddSwaggerGen();
 
     builder.ConfigureApiVersioning();
-    builder.AddConfigOptions();
-    builder.AddPostgres();
+    builder.ConfigureConfigOptions();
+    builder.ConfigurePostgresDb();
+    builder.ConfigureRedisDb();
+    builder.ConfigureRateLimiting();
+    builder.ConfigureIdentity();
 
     builder.Services.ConfigureCors();
     builder.Services.ConfigureRepositoryManager();
@@ -30,6 +33,7 @@ try
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
+    app.UseRateLimiter();
     app.ConfigureExceptionHandler();
     if (app.Environment.IsDevelopment())
     {
@@ -49,6 +53,8 @@ try
     });
 
     app.UseCors(RecapApiResources.CorsPolicy);
+
+    app.UseAuthentication();
 
     app.UseAuthorization();
 

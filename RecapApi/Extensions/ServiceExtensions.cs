@@ -1,16 +1,19 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RecapApi.Contracts;
+using RecapApi.Entities;
 using RecapApi.Options;
 using RecapApi.Repositories;
 using RecapApi.Services;
 using RecapApi.Validations;
+using StackExchange.Redis;
 
 namespace RecapApi.Extensions;
 
 public static class ServiceExtensions
 {
-    public static void AddConfigOptions(this WebApplicationBuilder builder)
+    public static void ConfigureConfigOptions(this WebApplicationBuilder builder)
     {
         builder
             .Services
@@ -20,7 +23,7 @@ public static class ServiceExtensions
             .AddSingleton<IValidateOptions<ConnectionStringOptions>, ConnectionStringOptionsValidation>();
     }
 
-    public static void AddPostgres(this WebApplicationBuilder builder)
+    public static void ConfigurePostgresDb(this WebApplicationBuilder builder)
     {
         builder
             .Services
@@ -47,5 +50,31 @@ public static class ServiceExtensions
     public static void ConfigureServiceManager(this IServiceCollection services)
     {
         services.AddScoped<IServiceManager, ServiceManager>();
+    }
+
+    public static void ConfigureRedisDb(this WebApplicationBuilder builder)
+    {
+        var redisUrl = builder.Configuration.GetConnectionString(RecapApiResources.RedisUrl)!;
+        builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisUrl));
+    }
+
+    public static void ConfigureIdentity(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddAuthentication();
+        builder
+            .Services
+            .AddIdentity<User, IdentityRole>(opt =>
+                {
+                    opt.Password.RequireDigit = true;
+                    opt.Password.RequireLowercase = true;
+                    opt.Password.RequireUppercase = true;
+                    opt.Password.RequireNonAlphanumeric = true;
+                    opt.Password.RequiredUniqueChars = 2;
+                    opt.Password.RequiredLength = 10;
+                    opt.User.RequireUniqueEmail = true;
+                }
+            )
+            .AddEntityFrameworkStores<RepositoryContext>()
+            .AddDefaultTokenProviders();
     }
 }

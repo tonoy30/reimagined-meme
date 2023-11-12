@@ -14,6 +14,7 @@ public sealed class CompanyRepository : RepositoryBase<Company>, ICompanyReposit
     {
         return await FindAll(trackChanges)
             .Include(c => c.Employees)
+            .OrderByDescending(c => c.ModifiedAt)
             .ToListAsync();
     }
 }
