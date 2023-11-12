@@ -18,7 +18,18 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
                 Age = 26,
                 Position = "Founder & CTO",
                 CreatedAt = DateTime.UtcNow,
-                ModifiedAt = DateTime.UtcNow
+                ModifiedAt = DateTime.UtcNow,
+                CompanyId = "cmp_TMtrWseo08Z2Mk"
+            },
+            new()
+            {
+                Id = RandomIdGenerator.Generate("emp"),
+                Name = "Ali Ahmmed",
+                Age = 26,
+                Position = "Founder & CFO",
+                CreatedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow,
+                CompanyId = "cmp_TMtrWseo08Z2Mk"
             },
         };
         builder.HasData(employees);
